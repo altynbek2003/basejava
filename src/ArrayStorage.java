@@ -6,9 +6,6 @@ public class ArrayStorage {
     private int StorageLength = 10000;
     private Resume[] storage = new Resume[StorageLength];//Исправлено
     private int size = 0;
-//Исправлено
-   // public ArrayStorage() {
-      //  size = 0;
         void clear() {
         for (int i = 0; i < size; i++) {
             storage[i] = null;
@@ -28,14 +25,7 @@ public class ArrayStorage {
         Objects.requireNonNull(uuid, "uuis не должен быть равен null");
         for (int i = 0; i < size; i ++) {
             Resume resume = storage[i];
-            if (resume != null && uuid.equals(resume.uuid)) {
-                return resume;
-            } else {
-                System.out.println("UUID не существует");
-                break;
-            }
-        }
-        return null;
+            return null;
     }
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
