@@ -1,12 +1,15 @@
 /**
  * Array based storage for Resumes
  */
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
 public class ArrayStorage {
-
-    private Resume[] storage = new Resume[10000];
+    private int storageLenght = 10000;
+    private Resume[] storage = new Resume[storageLenght];
     private int size = 0;
 
-    public void clear() {
+    void clear() {
         for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
@@ -14,16 +17,18 @@ public class ArrayStorage {
 
     }
 
-    public void save(Resume r) {
+    void save(Resume r)
+    {
         //TODO check if resume present & check storage overflow
-        storage[size] = r;
-        size++;
-
+        if (size < storageLenght) {storage[size] = r;
+        size++;}
+    else System.out.println ("Хранилище Переполнено");
     }
 
-    public Resume get(String uuid) {
+       Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].uuid)) {
+            if (uuid==storage[i].getUuid())
+            {
                 return storage[i];
             }
         }
@@ -34,29 +39,31 @@ public class ArrayStorage {
     public void delete(String uuid) {
         // TODO check if resume present
         for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].uuid)) {
+            if (uuid==storage[i].getUuid()) {
                 storage[i] = storage[size - 1];
                 storage[size - 1] = null;
                 size--;
+                return;
             }
         }
+        System.out.println( "Резюме не существует!");
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
 
-    public Resume[] getAll() {
-        Resume[] result = new Resume[size];
+    Resume[] getAll() {
+        Resume[] limitStroge = new Resume[size];
         for (int i = 0; i < size; i++) {
-            result[i] = storage[i];
+            limitStroge[i] = storage[i];
         }
-        return result;
+        return limitStroge;
 
     }
 
     public int size() {
-        return ;
+        return size ;
     }
 
 }
