@@ -1,60 +1,62 @@
-import java.util.Objects;
-
+/**
+ * Array based storage for Resumes
+ */
 public class ArrayStorage {
-    private int StorageLength = 10000;
-    private Resume[] storage = new Resume[StorageLength];
+
+    private Resume[] storage = new Resume[10000];
     private int size = 0;
 
-    void clear() {
+    public void clear() {
         for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
         size = 0;
+
     }
 
-    void save(Resume r) {
-        if (size < StorageLength) {
-            storage[size] = r;
-            size++;
-        } else {
-            System.out.println("Хранилище переполнено");
-        }
+    public void save(Resume r) {
+        //TODO check if resume present & check storage overflow
+        storage[size] = r;
+        size++;
+
     }
 
-    Resume[] get(String uuid) {
-        Objects.requireNonNull(uuid, "uuis не должен быть равен null");
+    public Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            Resume resume = storage[i];
-            return new Resume[]{storage[i]};
-        }
-
-        void delete (String uuid)
-        {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].uuid.equals(uuid)) {
-                    storage[i] = storage[size - 1];
-                    storage[size - 1] = null;
-                    size--;
-                }
-            }
-            System.out.println("Резюме не существует");
-        }
-
-        Resume[] getAll;
-        {
-            Resume[] NonEmpty = new Resume[size];
-            System.arraycopy(storage, 0, NonEmpty, 0, size);
-            return NonEmpty;
-        }
-    }
-
-    int size(String uuid) {
-
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i])) {
-                return i;
+            if (uuid.equals(storage[i].uuid)) {
+                return storage[i];
             }
         }
-        return 0;
+        return null;
+
     }
+
+    public void delete(String uuid) {
+        // TODO check if resume present
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].uuid)) {
+                storage[i] = storage[size - 1];
+                storage[size - 1] = null;
+                size--;
+            }
+        }
+    }
+
+    /**
+     * @return array, contains only Resumes in storage (without null)
+     */
+
+    public Resume[] getAll() {
+        Resume[] result = new Resume[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = storage[i];
+        }
+        return result;
+
+    }
+
+    public int size() {
+        return ;
+    }
+
 }
