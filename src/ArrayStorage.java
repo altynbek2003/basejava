@@ -14,36 +14,36 @@ public class ArrayStorage {
 
     }
 
-    void save(Resume r)
-    {
+    void save(Resume r) {
         //TODO check if resume present & check storage overflow
-        if (size < storageSize) {storage[size] = r;
-        size++;}
-    else System.out.println ("Хранилище Переполнено");
+        if (size < storageSize) {
+            storage[size] = r;
+            size++;
+        } else {
+            System.out.println ("Хранилище Переполнено");
+        }
     }
 
-       Resume get(String uuid) {
+    Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (uuid==storage[i].getUuid())
-            {
+            if (uuid == storage[i].getUuid ()) {
                 return storage[i];
             }
         }
         return null;
-
     }
 
-     void delete(String uuid) {
+    void delete(String uuid) {
         // TODO check if resume present
         for (int i = 0; i < size; i++) {
-            if (uuid==storage[i].getUuid()) {
+            if (uuid == storage[i].getUuid ()) {
                 storage[i] = storage[size - 1];
                 storage[size - 1] = null;
                 size--;
                 return;
             }
         }
-        System.out.println( "Резюме не существует!");
+        System.out.println ("Резюме не существует!");
     }
 
     /**
@@ -58,7 +58,7 @@ public class ArrayStorage {
     }
 
     int size() {
-        return size ;
+        return size;
     }
 
 }
