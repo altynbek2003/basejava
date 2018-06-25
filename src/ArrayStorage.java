@@ -26,17 +26,18 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (uuid == storage[i].getUuid ()) {
+            if (uuid.equals (storage[i].getUuid ())) {
                 return storage[i];
             }
         }
         return null;
+
     }
 
     void delete(String uuid) {
         // TODO check if resume present
         for (int i = 0; i < size; i++) {
-            if (uuid == storage[i].getUuid ()) {
+            if (uuid.equals (storage[i].getUuid ())) {
                 storage[i] = storage[size - 1];
                 storage[size - 1] = null;
                 size--;
