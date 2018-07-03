@@ -14,37 +14,48 @@ public class ArrayStorage {
 
     }
 
+    public void update(Resume r) {
+        int index;
+        index = getPoint (r.getUuid ());
+        if (index == -1) {
+            System.out.println ("Резюме" + r.getUuid () + " не существует");
+        } else {
+            storage[index] = r;
+        }
+    }
+
     void save(Resume r) {
         //TODO check if resume present & check storage overflow
-        if (size < storageSize) {
+        if (getPoint (r.getUuid ()) != -1) {
+            System.out.println ("Резюме " + r.getUuid () + " существует");
+        } else if (size >= storage.length) {
+            System.out.println ("Хранилище переполнено");
+        } else {
             storage[size] = r;
             size++;
-        } else {
-            System.out.println ("Хранилище Переполнено");
         }
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals (storage[i].getUuid ())) {
-                return storage[i];
-            }
+        int index;
+        index = getPoint (uuid);
+        if (index == -1) {
+            System.out.println ("Резюме " + uuid + " не существует");
+            return null;
         }
-        return null;
-
+        return storage[index];
     }
 
     void delete(String uuid) {
         // TODO check if resume present
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals (storage[i].getUuid ())) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                return;
-            }
+        int index = getPoint (uuid);
+        if (index == -1) {
+            System.out.println ("Резюме " + uuid + " не существует");
+        } else {
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
         }
-        System.out.println ("Резюме не существует!");
     }
 
     /**
@@ -62,4 +73,12 @@ public class ArrayStorage {
         return size;
     }
 
+    private int getPoint(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals (storage[i].getUuid ())) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }
