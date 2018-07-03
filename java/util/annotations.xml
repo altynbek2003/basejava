@@ -1,0 +1,5 @@
+<root>
+    <item name='java.util.Arrays T[] copyOfRange(T[], int, int)'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
