@@ -15,8 +15,7 @@ public class ArrayStorage {
     }
 
     public void update(Resume r) {
-        int index;
-        index = getPoint (r.getUuid ());
+        int  index = getPoint (r.getUuid ());
         if (index == -1) {
             System.out.println ("Резюме" + r.getUuid () + " не существует");
         } else {
@@ -37,8 +36,7 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        int index;
-        index = getPoint (uuid);
+        int   index = getPoint (uuid);
         if (index == -1) {
             System.out.println ("Резюме " + uuid + " не существует");
             return null;
