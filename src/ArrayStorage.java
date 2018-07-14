@@ -10,19 +10,19 @@ public class ArrayStorage {
     private int size = 0;
 
     void clear() {
-Arrays.fill (storage, null);
-        //for (int i = 0; i < size; i++) {
-       //     storage[i] = null;
-      //  }
+
+        for (int i = 0; i < size; i++) {
+            Arrays.fill (storage, null);
+        }
         size = 0;
     }
 
     public void update(Resume r) {
-        int  index = getPoint (r.getUuid ());
-        if (index == -1) {
+        int point = getPoint (r.getUuid ());
+        if (point == -1) {
             System.out.println ("Резюме" + r.getUuid () + " не существует");
         } else {
-            storage[index] = r;
+            storage[point] = r;
         }
     }
 
@@ -39,21 +39,21 @@ Arrays.fill (storage, null);
     }
 
     public Resume get(String uuid) {
-        int   index = getPoint (uuid);
-        if (index == -1) {
+        int point = getPoint (uuid);
+        if (point == -1) {
             System.out.println ("Резюме " + uuid + " не существует");
             return null;
         }
-        return storage[index];
+        return storage[point];
     }
 
     void delete(String uuid) {
         // TODO check if resume present
-        int index = getPoint (uuid);
-        if (index == -1) {
+        int point = getPoint (uuid);
+        if (point == -1) {
             System.out.println ("Резюме " + uuid + " не существует");
         } else {
-            storage[index] = storage[size - 1];
+            storage[point] = storage[size - 1];
             storage[size - 1] = null;
             size--;
         }
