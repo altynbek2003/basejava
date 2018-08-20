@@ -1,11 +1,8 @@
 import java.util.Arrays;
 
-/**
- * Array based storage for Resumes
- */
 
 public abstract class AbstractArrayStorage implements Storage {
-    protected static int storageSize = 10000;
+    protected static final int storageSize = 10000;
     protected Resume[] storage = new Resume[storageSize];
     protected int size = 0;
 
@@ -14,44 +11,37 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     public void clear() {
-
-        for (int i = 0; i < size; i++) {
-            Arrays.fill (storage, null);
-        }
+        Arrays.fill (storage, 0, size, null);
         size = 0;
     }
 
-    public void update(Resume r) {
-        int index = getIndex (r.getUuid ());
+    public void update(Resume resume) {
+        int index = getIndex (resume.getUuid ());
         if (index == -1) {
-            System.out.println ("Резюме" + r.getUuid () + " не существует");
+            System.out.println ("Резюме" + resume.getUuid () + " не существует");
         } else {
-            storage[index] = r;
+            storage[index] = resume;
         }
     }
 
-    public void save(Resume r) {
-        //TODO check if resume present & check storage overflow
-        int index= getIndex (r.getUuid ());
-        if (index >=0) {
-            System.out.println ("Резюме " + r.getUuid () + " существует");
+    public void save(Resume resume) {
+        int index = getIndex (resume.getUuid ());
+        if (index >= 0) {
+            System.out.println ("Резюме " + resume.getUuid () + " существует");
         } else if (size >= storage.length) {
             System.out.println ("Хранилище переполнено");
         } else {
-            storage[size] = r;
-             size++;
+            storage[size] = resume;
+            size++;
         }
     }
-
+    protected abstract void addElement(Resume resume, int index);
     /**
      * @return array, contains only Resumes in storage (without null)
      */
 
     public Resume[] getAll() {
-        Resume[] limitStorage = new Resume[size];
-        System.arraycopy (storage, 0, limitStorage, 0, size);
-        return limitStorage;
-
+           return Arrays.copyOfRange(storage, 0, size);
     }
 
 
@@ -77,7 +67,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void fillElement(int index);
 
-    protected abstract void addElement(Resume r, int index);
+
 
     protected abstract int getIndex(String uuid);
 }
