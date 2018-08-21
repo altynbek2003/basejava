@@ -3,11 +3,19 @@ public class Resume {
     // Unique identifier
     public String uuid;
 
+
     public String getUuid() {
         return uuid;
     }
 
     public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public Resume() {
+    }
+
+    public Resume(String uuid) {
         this.uuid = uuid;
     }
 
@@ -18,7 +26,7 @@ public class Resume {
 
         Resume resume = (Resume) o;
 
-        return uuid.equals (resume.uuid);
+        return uuid.equals(resume.uuid);
     }
 
     @Override
