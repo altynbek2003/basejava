@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 
 public abstract class AbstractArrayStorage implements Storage {
-    protected static final int storageSize = 10000;
-    protected Resume[] storage = new Resume[storageSize];
+    protected static final int STORAGE_SIZE = 10000;
+    protected Resume[] storage = new Resume[STORAGE_SIZE];
     protected int size = 0;
 
     public int size() {
@@ -35,15 +35,16 @@ public abstract class AbstractArrayStorage implements Storage {
             size++;
         }
     }
+
     protected abstract void addElement(Resume resume, int index);
+
     /**
      * @return array, contains only Resumes in storage (without null)
      */
 
     public Resume[] getAll() {
-           return Arrays.copyOfRange(storage, 0, size);
+        return Arrays.copyOfRange (storage, 0, size);
     }
-
 
     public void delete(String uuid) {
         int index = getIndex (uuid);
@@ -66,8 +67,6 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     protected abstract void fillElement(int index);
-
-
 
     protected abstract int getIndex(String uuid);
 }
