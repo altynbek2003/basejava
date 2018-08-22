@@ -1,14 +1,10 @@
 public class Resume{
 
     // Unique identifier
-    private String uuid;
+    public String uuid;
 
     public Resume(String uuid){
         this.uuid = uuid;
-    }
-
-    public Resume(){
-
     }
 
     public String getUuid(){
