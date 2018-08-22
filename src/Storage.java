@@ -1,6 +1,6 @@
 
 
-public interface Storage {
+public interface Storage{
     void clear();
 
     void update(Resume resume);
